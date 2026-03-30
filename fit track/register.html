@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>FitTrack — регистрация</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="top-bar">
+        <button id="langToggleBtn" class="lang-btn"><i class="fas fa-globe"></i> English</button>
+        <button id="themeToggleBtn" class="theme-toggle"><i class="fas fa-moon"></i> Тёмная тема</button>
+    </div>
+    <div class="header">
+        <h1>FitTrack <i class="fas fa-heartbeat"></i></h1>
+        <p id="authTitle">Создайте новый аккаунт</p>
+    </div>
+    <div class="dashboard" style="grid-template-columns: 1fr; max-width: 400px; margin: 0 auto;">
+        <div class="card">
+            <h2 id="registerTitle"><i class="fas fa-user-plus"></i> Регистрация</h2>
+            <input type="email" id="regEmail" placeholder="Email">
+            <input type="password" id="regPassword" placeholder="Пароль" style="margin-top: 10px;">
+            <input type="text" id="regName" placeholder="Имя (необязательно)" style="margin-top: 10px;">
+            <button id="registerBtn">Зарегистрироваться</button>
+            <p style="margin-top: 15px; text-align: center;">
+                <span id="haveAccountText">Уже есть аккаунт?</span> <a href="login.html" id="loginLink">Войти</a>
+            </p>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

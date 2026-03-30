@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>FitTrack — настройки</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar">
+        <div class="sidebar-header"><h3>FitTrack</h3></div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-btn" id="navMain"><i class="fas fa-home"></i> Главная</a>
+            <a href="workouts.html" class="sidebar-btn" id="navWorkouts"><i class="fas fa-dumbbell"></i> Тренировки</a>
+            <a href="profile.html" class="sidebar-btn" id="navProfile"><i class="fas fa-user"></i> Профиль</a>
+            <a href="settings.html" class="sidebar-btn active" id="navSettings"><i class="fas fa-cog"></i> Настройки</a>
+            <a href="report.html" class="sidebar-btn" id="navReport"><i class="fas fa-chart-bar"></i> Отчёт</a>
+            <button id="logoutBtn" class="sidebar-btn logout-btn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <button id="langToggleBtn" class="lang-btn"><i class="fas fa-globe"></i> English</button>
+            <button id="themeToggleBtn" class="theme-toggle"><i class="fas fa-moon"></i> Тёмная тема</button>
+        </div>
+        <div class="header">
+            <h1>Настройки</h1>
+        </div>
+        <div class="card" style="max-width: 500px; margin: 0 auto;">
+            <h2 id="notificationsSettingsTitle"><i class="fas fa-bell"></i> Push-уведомления</h2>
+            <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" id="notificationsToggle"> <span id="notificationsLabel">Включить уведомления</span>
+                </label>
+                <small id="notificationsSmall">Разрешите браузеру показывать уведомления</small>
+            </div>
+            <div id="timeSettings" style="display: none;">
+                <div class="form-group">
+                    <label id="reminderTimeLabel">Время напоминания</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <select id="reminderHour" style="width: 80px;">
+                            <option value="0">00</option><option value="1">01</option><option value="2">02</option>
+                            <option value="3">03</option><option value="4">04</option><option value="5">05</option>
+                            <option value="6">06</option><option value="7">07</option><option value="8">08</option>
+                            <option value="9">09</option><option value="10">10</option><option value="11">11</option>
+                            <option value="12">12</option><option value="13">13</option><option value="14">14</option>
+                            <option value="15">15</option><option value="16">16</option><option value="17">17</option>
+                            <option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                            <option value="21">21</option><option value="22">22</option><option value="23">23</option>
+                        </select>
+                        <span>:</span>
+                        <select id="reminderMinute" style="width: 80px;">
+                            <option value="0">00</option><option value="5">05</option><option value="10">10</option>
+                            <option value="15">15</option><option value="20">20</option><option value="25">25</option>
+                            <option value="30">30</option><option value="35">35</option><option value="40">40</option>
+                            <option value="45">45</option><option value="50">50</option><option value="55">55</option>
+                        </select>
+                    </div>
+                    <small id="reminderSmall">Ежедневное напоминание о тренировках на сегодня</small>
+                </div>
+                <div class="form-group">
+                    <button id="testNotificationBtn" class="btn-outline" style="width: 100%;">
+                        <i class="fas fa-bell"></i> <span id="testNotificationText">Тестовое уведомление</span>
+                    </button>
+                </div>
+            </div>
+            <hr style="margin: 20px 0;">
+            <h2 id="dangerZoneTitle"><i class="fas fa-exclamation-triangle"></i> Опасная зона</h2>
+            <button id="deleteAccountSettingsBtn" class="btn-outline" style="background: #ff6b6b20; color:#ff6b6b; width: 100%;">
+                <i class="fas fa-trash"></i> Удалить аккаунт
+            </button>
+            <small id="deleteAccountWarning" style="display: block; margin-top: 10px;">Это действие необратимо. Все ваши данные будут удалены.</small>
+        </div>
+    </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
