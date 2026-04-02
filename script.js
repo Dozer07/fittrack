@@ -459,21 +459,25 @@ async function apiCall(url, options = {}) {
     return response;
 }
 
-// ---------- Аутентификация ----------
 async function register(email, password, name) {
-    const response = await fetch(`${API_BASE}/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, name: name || email.split('@')[0] })
-    });
-    if (!response.ok) {
-        const err = await response.json();
-        alert(err.error || translations[currentLang].emailExists);
+    // Проверка на символ @
+    if (!email.includes('@')) {
+        alert(translations[currentLang].emailInvalid);
         return false;
     }
-    alert(translations[currentLang].registerSuccess);
-    window.location.href = 'login.html';
-    return true;
+    try {
+        await apiCall('/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, name: name || email.split('@')[0] })
+        });
+        alert(translations[currentLang].registerSuccess);
+        window.location.href = 'login.html';
+        return true;
+    } catch (err) {
+        alert(err.message);
+        return false;
+    }
 }
 
 async function login(email, password) {
@@ -549,20 +553,21 @@ function renderWorkouts() {
     const t = translations[currentLang];
     if (!currentUser?.workouts?.length) {
         const colCount = tbody.closest('table')?.rows[0]?.cells.length || 6;
-        tbody.innerHTML = `肌理<td colspan="${colCount}">${t.noWorkouts}      `;
+        tbody.innerHTML = `<tr><td colspan="${colCount}">${t.noWorkouts}</td></tr>`;
         return;
     }
     const isWorkoutsPage = window.location.pathname.includes('workouts.html');
     if (isWorkoutsPage) {
         tbody.innerHTML = currentUser.workouts.map(w => `
             <tr>
-                <td>${escapeHtml(w.name)}     .
-                <td>${escapeHtml(w.category)}     .
-                <td>${w.date}     .
-                <td>${w.duration} ${t.workoutDuration.split(' ')[0]}     .
-                <td>${w.calories} ${t.workoutCalories.split(' ')[0]}     .
-                <td><i class="fas fa-trash-alt delete-workout" data-id="${w.id}" style="cursor:pointer;"></i>     .
-              `).join('');
+                <td>${escapeHtml(w.name)}</td>
+                <td>${escapeHtml(w.category)}</td>
+                <td>${w.date}</td>
+                <td>${w.duration}</td>
+                <td>${w.calories}</td>
+                <td><i class="fas fa-trash-alt delete-workout" data-id="${w.id}" style="cursor:pointer;"></i></td>
+            </tr>
+        `).join('');
         document.querySelectorAll('.delete-workout').forEach(btn => {
             btn.addEventListener('click', async (e) => {
                 const id = parseInt(btn.dataset.id);
@@ -573,14 +578,15 @@ function renderWorkouts() {
         const recentWorkouts = [...currentUser.workouts].slice(0, 5);
         tbody.innerHTML = recentWorkouts.map(w => `
             <tr>
-                <td>${escapeHtml(w.name)}     .
-                <td>${escapeHtml(w.category)}     .
-                <td>${w.date}     .
-                <td>${w.duration} ${t.workoutDuration.split(' ')[0]}     .
-                <td>${w.calories} ${t.workoutCalories.split(' ')[0]}     .
-              `).join('');
+                <td>${escapeHtml(w.name)}</td>
+                <td>${escapeHtml(w.category)}</td>
+                <td>${w.date}</td>
+                <td>${w.duration}</td>
+                <td>${w.calories}</td>
+            </tr>
+        `).join('');
         if (!recentWorkouts.length) {
-            tbody.innerHTML = `肌理<td colspan="5">${t.noWorkouts}      `;
+            tbody.innerHTML = `<tr><td colspan="5">${t.noWorkouts}</td></tr>`;
         }
     }
 }
